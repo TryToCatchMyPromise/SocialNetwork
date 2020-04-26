@@ -1,0 +1,9 @@
+.dialog {
+    color: red;
+}
+
+.item img {
+    width: 50px;
+    height: 80px;
+    border-radius: 50%;
+}
