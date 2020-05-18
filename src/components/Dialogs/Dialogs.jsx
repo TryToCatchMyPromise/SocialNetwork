@@ -4,10 +4,11 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import App from "../../App";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../Redux/dialogs-reducer";
+import {Redirect} from "react-router-dom";
 
 const Dialogs = (props) => {
 
-          let state = props.dialogsPage;
+  let state = props.dialogsPage;
 
   let dialogsElements = state.dialogs
       .map(dialog => (<DialogItem name={dialog.name} key={dialog.id} id={dialog.id}/>));
@@ -15,18 +16,21 @@ const Dialogs = (props) => {
   let messagesElements = state.messages
       .map(message => (<Message message={message.message} key={message.id} id={message.id}/>));
 
-          let newMessageBody = state.newMessageBody;
+  let newMessageBody = state.newMessageBody;
 
   let onSendMessageClick = () => {
     props.sendMessage();
   };
 
-          let onNewMessageChange = (e) => {
-            let body = e.target.value;
-            props.updateNewMessageBody(body);
-            // props.store.dispatch(updateNewMessageBodyCreator(body));
-          };
+  let onNewMessageChange = (e) => {
+    let body = e.target.value;
+    props.updateNewMessageBody(body);
+    // props.store.dispatch(updateNewMessageBodyCreator(body));
+  };
 
+  if (!props.isAuth) {
+    return <Redirect to ={"/login"} />;
+  }
 
   return (
       <div className={classes.dialogs}>
