@@ -7,30 +7,39 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
+import {getAuthUserData} from "./Redux/auth-reducer";
+import {connect} from "react-redux";
 
-const App = (props) => {
-  return (
+class App extends React.Component {
 
-      <div className="app-wrapper">
-        <HeaderContainer/>
-        <Nav/>
+  componentDidMount() {
+    this.props.getAuthUserData();
+  }
 
-        <div className="app-wrapper-content">
-          <Route path="/dialogs" render={
-            () => <DialogsContainer/>}/>
-          <Route path="/profile/:userId?" render={
-            () => <ProfileContainer/>}/>
+  render() {
+    return (
 
-          <Route path="/users" render={
-            () => <UsersContainer/>}/>
+        <div className="app-wrapper">
+          <HeaderContainer/>
+          <Nav/>
 
-          <Route path="/login" render={
-            () => <LoginPage/>}/>
+          <div className="app-wrapper-content">
+            <Route path="/dialogs" render={
+              () => <DialogsContainer/>}/>
+            <Route path="/profile/:userId?" render={
+              () => <ProfileContainer/>}/>
+
+            <Route path="/users" render={
+              () => <UsersContainer/>}/>
+
+            <Route path="/login" render={
+              () => <LoginPage/>}/>
+          </div>
+
         </div>
 
-      </div>
+    );
+  }
+}
 
-  );
-};
-
-export default App;
+export default connect(null, {getAuthUserData})(App);
