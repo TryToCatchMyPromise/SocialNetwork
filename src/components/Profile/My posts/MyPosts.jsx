@@ -6,6 +6,22 @@ import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
 
 const MyPosts = (props) => {
+
+//   const sum = (a) => typeof a === 'undefined' ?
+//       a :
+//       ( (b) => typeof b === 'undefined' ?
+//               a :
+//               ( (c) => typeof c === "undefined" ?
+//               () => a + b :
+//               () => (a + b)/c )
+//       ) ;
+//
+//   const sum2 = (a) => typeof a === 'undefined' ? a : (b) => typeof b === 'undefined' ? a : sum2(a + b);
+// console.log(sum2(2)(4)());
+//   console.log(sum(2)(4)(3)());
+
+
+  console.log("RENDER");
   let postsElements = props.posts
       .map(post => (<Post message={post.message}
                           likeCounts={post.likesCount}
