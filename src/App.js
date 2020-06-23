@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
-import {Route} from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -10,6 +10,7 @@ import LoginPage from "./components/Login/Login";
 import {connect} from "react-redux";
 import {initializeApp} from "./Redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import {compose} from "redux";
 
 class App extends React.Component {
 
@@ -53,4 +54,6 @@ const mapStateToProps = (state) => ({
   initialized: state.app.initialized,
 })
 
-export default connect(mapStateToProps, {initializeApp})(App);
+export default compose(
+    withRouter,
+connect(mapStateToProps, {initializeApp}))(App);

@@ -1,39 +1,23 @@
 import React from "react";
 import {Field, reduxForm} from "redux-form";
-import {Input} from "../common/FormsControls/FormsControls";
+import {createField, Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../Redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import classes from "./../common/FormsControls/FormControls.module.css";
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
   return (
-      <form onSubmit={props.handleSubmit}>
-        <div>
-          <Field placeholder={"Email"}
-                 name={"email"}
-                 component={Input}
-                 validate={[required]}
-          />
-        </div>
-        <div>
-          <Field placeholder={"Password"}
-                 name={"password"}
-                 component={Input}
-                 validate={[required]}
-                 type={"password"}
-          />
-        </div>
-        <div>
-          <Field type={"checkbox"} name={"rememberMe"} component={Input}/> remember me
-        </div>
-
+      <form onSubmit={handleSubmit}>
+        {createField("Email", "email", [required], Input)}
+        {createField("Password", "password", [required], Input, {type: "password"})}
+        {createField(null, "rememberMe", [], Input, {type: "checkbox"}, "remember me")}
         <div>
           <button>Login</button>
         </div>
-        { props.error && <div className={classes.formSummeryError}>
-          {props.error}
+        {error && <div className={classes.formSummeryError}>
+          {error}
         </div>}
       </form>
   )
