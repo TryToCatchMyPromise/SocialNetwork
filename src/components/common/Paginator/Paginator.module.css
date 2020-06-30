@@ -1,3 +1,13 @@
 .selectedPage {
     font-size: 20px;
 }
+
+.paginator {
+    /*border: 1px solid red;*/
+    margin: 10px 0 10px 0;
+}
+
+.pageNumber {
+    border: 1px solid red;
+    padding: 2px;
+}

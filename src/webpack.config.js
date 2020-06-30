@@ -9,8 +9,15 @@ module.exports = {
     main: './index.js'
   },
   output: {
-    filename: '[name].[contenthash].js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
+    path: './dist',
+    publicPath: 'dist/',
+
+    // filename: '[name].[contenthash].js',
+    // chunkFilename: '[name].bundle.js',
+    // path: path.resolve(__dirname, 'dist'),
+
   },
   resolve: {
     extensions: [".js", ".jsx", ".png"],
@@ -24,7 +31,7 @@ module.exports = {
         title: 'My social network',
         template: "./index.html"
       }),
-      new CleanWebpackPlugin()
+      new CleanWebpackPlugin(),
   ],
   module: {
     rules: [

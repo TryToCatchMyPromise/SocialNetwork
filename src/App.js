@@ -1,8 +1,7 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
 import {Route, withRouter} from "react-router-dom";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -11,6 +10,10 @@ import {connect} from "react-redux";
 import {initializeApp} from "./Redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import {compose} from "redux";
+
+// lazy loading realization
+// import DialogsContainer from "./components/Dialogs/DialogsContainer";
+const DialogsContainer = lazy(() => import("./components/Dialogs/DialogsContainer"));
 
 class App extends React.Component {
 
