@@ -3,10 +3,18 @@ import classes from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import userPhoto from '../../../assets/images/user_icon.png';
 
-const ProfileInfo = ({profile, status, updateStatus}) => {
+
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
   if (!profile) {
     return <Preloader/>
+  }
+
+  const onMainPhotoSelected = (e) => {
+    if (e.target.files.length) {
+      savePhoto(e.target.files[0])
+    }
   }
 
   return (
@@ -15,14 +23,14 @@ const ProfileInfo = ({profile, status, updateStatus}) => {
         {/*  <img src="https://tinyjpg.com/images/social/website.jpg"/>*/}
         {/*</div>*/}
         <div className={classes.descriptionBlock}>
-          <img src={profile.photos.large}/>
-          <ProfileStatusWithHooks status={status} updateStatus = {updateStatus}/>
-
+          <img src={profile.photos.large || userPhoto} className={classes.mainPhoto}/>
+          {isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}
+          <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
 
 
           {/*<div>{props.profile.aboutMe}</div>*/}
           {profile.lookingForAJob ? <div>Ищу работу</div> : <div>Не ищу работу</div>}
-                   ava + description
+          ava + description
         </div>
       </div>
   );
