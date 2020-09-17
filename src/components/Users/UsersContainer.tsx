@@ -19,22 +19,46 @@ import {
   getPageSize,
   getTotalUsersCount, getUsers
 } from "../../Redux/users-selectors";
+import {UserType} from "../../types/types";
+import {AppStateType} from "../../Redux/redux-store";
+
+type MapStateToPropsType = {
+  currentPage: number
+  pageSize: number
+  isFetching: boolean
+  totalUsersCount: number
+  users: Array<UserType>
+  followingInProgress: Array<number>
+}
+
+type MapDispatchToPropsType = {
+  getUsers: (currentPage: number, pageSize:number) => void
+  unfollow: (userId: number) => void
+  follow: (userId: number) => void
+}
+
+type OwnPropsType = {
+  pageTitle: string
+}
 
 
-class UsersContainer extends React.Component {
+type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType;
+
+class UsersContainer extends React.Component<PropsType> {
 
   componentDidMount() {
     const {currentPage, pageSize} = this.props;
-this.props.requestUsers(currentPage, pageSize);
+this.props.getUsers(currentPage, pageSize);
   }
 
-  onPageChanged = (pageNumber) => {
+  onPageChanged = (pageNumber: number) => {
     const {pageSize} = this.props;
-    this.props.requestUsers(pageNumber, pageSize);
+    this.props.getUsers(pageNumber, pageSize);
   }
 
   render() {
     return <>
+      <h2>{this.props.pageTitle}</h2>
       {this.props.isFetching ? <Preloader/> : null}
       <Users totalUsersCount={this.props.totalUsersCount}
              pageSize={this.props.pageSize}
@@ -43,14 +67,13 @@ this.props.requestUsers(currentPage, pageSize);
              users={this.props.users}
              follow={this.props.follow}
              unfollow={this.props.unfollow}
-             toggleFollowingInProgress={this.props.toggleFollowingInProgress}
              followingInProgress={this.props.followingInProgress}
       />
     </>
   };
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType):MapStateToPropsType => {
   return {
     users: getUsers(state),
     pageSize: getPageSize(state),
@@ -61,13 +84,15 @@ let mapStateToProps = (state) => {
   }
 }
 
+// @ts-ignore
 export default compose(
-    connect(mapStateToProps, {
-      followSuccess,
-      unfollowSuccess,
-      setCurrentPage,
-      toggleFollowingInProgress,
-      requestUsers,
+    //TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultRootState
+    connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
+      // followSuccess,
+      // unfollowSuccess,
+      // setCurrentPage,
+      // toggleFollowingInProgress,
+      getUsers: requestUsers,
       follow,
       unfollow,
     }),

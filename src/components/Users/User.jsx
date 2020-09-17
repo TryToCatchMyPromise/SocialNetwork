@@ -40,8 +40,6 @@ let User = ({user, followingInProgress, unfollow, follow}) => {
                     <div>{"u.location.city"}</div>
                   </span>
                   </span>
-        )
-        }
       </div>
   );
 };

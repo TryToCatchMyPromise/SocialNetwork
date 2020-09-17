@@ -23,7 +23,7 @@ console.log(sum2(2)(4)());
 
   console.log("RENDER");
   let postsElements = props.posts
-      .map(post => (<Post message={post.message}
+      .map(post => (<Post key={post.id} message={post.message}
                           likeCounts={post.likesCount}
                           id={post.id}/>));
 

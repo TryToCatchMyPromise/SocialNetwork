@@ -1,5 +1,5 @@
 import React from "react";
-import profileReducer, {addPostActionCreator, deletePost} from "./profile-reducer";
+import profileReducer, {addPostActionCreator, deletePost} from "./profile-reducer.ts";
 
 let state = {
   posts: [{id: 1, message: 'Hi, how are You?', likesCount: 12},
