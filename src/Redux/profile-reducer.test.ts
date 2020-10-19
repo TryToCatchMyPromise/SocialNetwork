@@ -1,13 +1,17 @@
 import React from "react";
-import profileReducer, {addPostActionCreator, deletePost} from "./profile-reducer.ts";
+import profileReducer, {actions} from "./profile-reducer";
 
 let state = {
   posts: [{id: 1, message: 'Hi, how are You?', likesCount: 12},
-    {id: 2, message: 'It is my first post!', likesCount: 16},],
+    {id: 2, message: 'It is my first post!', likesCount: 16},
+  ],
+  profile: null,
+  status: '',
+  newPostText: ''
 };
 
 it('amount of posts should be incremented', () => {
-let action = addPostActionCreator("New post");
+let action = actions.addPostActionCreator("New post");
 
   let newState = profileReducer(state, action);
 
@@ -15,7 +19,7 @@ let action = addPostActionCreator("New post");
 });
 
 it('after deleting length of posts should be decrement', () => {
-  let action = deletePost(1);
+  let action = actions.deletePost(1);
 
   let newState = profileReducer(state, action);
 

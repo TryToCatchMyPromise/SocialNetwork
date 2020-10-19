@@ -1,16 +1,21 @@
-import React from "react";
+import React, {FC} from "react";
 import classes from './Profile.module.css'
 import MyPosts from "./My posts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfoApp";
 import MyPostsContainer from "./My posts/MyPostsContainer";
 import {Redirect} from "react-router-dom";
+import {ProfileType} from '../../types/types';
 
-const Profile = (props) => {
+type PropsType = {
+    profile: ProfileType | null
+    status: string
+    updateStatus: (status: string) => void
+    isOwner: boolean
+    savePhoto: (file: File) => void
+    saveProfile: (profile: ProfileType) => Promise<any>
+}
 
-  if (props.isAuth === false) {
-    return <Redirect to ={"/login"} />;
-  }
-
+const Profile: FC<PropsType> = (props) => {
   return (
       <div>
         <ProfileInfo savePhoto={props.savePhoto}
