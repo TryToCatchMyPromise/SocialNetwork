@@ -1,15 +1,15 @@
 import React, {FC} from "react";
 import classes from "./../Dialogs.module.css"
 
-type PropsType = {
+type IMessage = {
     id: number
     message: string
 }
 
-const Message: FC<PropsType> = (props) => {
+const Message: FC<IMessage> = ({message}) => {
   return (
       <div className={classes.dialog}>
-        {props.message}
+        {message}
       </div>
   );
 };

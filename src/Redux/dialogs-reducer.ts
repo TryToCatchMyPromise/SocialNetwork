@@ -1,6 +1,4 @@
-import exp from "constants";
-import {type} from "os";
-import {InferActionsTypes} from "./redux-store";
+import {InferActionsTypes} from './redux-store'
 
 type MessageType = {
     id: number

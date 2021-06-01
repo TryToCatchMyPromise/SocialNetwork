@@ -1,8 +1,8 @@
-import {ResultCodeForCaptchaEnum, ResultCodesEnum} from "../API/api";
-import {FormAction, stopSubmit} from "redux-form";
-import {authAPI} from "../API/auth-api";
-import {securityAPI} from "../API/security-api";
-import {BaseThunkType, InferActionsTypes} from "./redux-store";
+import {FormAction, stopSubmit} from 'redux-form'
+import {ResultCodeForCaptchaEnum, ResultCodesEnum} from '../API/api'
+import {authAPI} from '../API/auth-api'
+import {securityAPI} from '../API/security-api'
+import {BaseThunkType, InferActionsTypes} from './redux-store'
 
 export type InitialStateType = typeof initialState;
 type ActionsType = InferActionsTypes<typeof actions>
