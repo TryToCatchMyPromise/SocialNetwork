@@ -1,6 +1,7 @@
 import React, {Component, lazy} from 'react'
 import './App.css'
 import {Link, Redirect, Route, Switch, withRouter} from 'react-router-dom'
+import {Chat} from 'src/pages/Chat/Chat'
 import {LoginPage} from './components/Login/Login'
 import {connect} from 'react-redux'
 import {initializeApp} from './Redux/app-reducer'
@@ -21,7 +22,7 @@ const {Content, Footer, Sider} = Layout
 
 const Dialogs = lazy(() => import('src/components/Dialogs/Dialogs').then(({Dialogs}) => ({default: Dialogs})))
 const Profile = lazy(() => import('./components/Profile/Profile').then(({Profile}) => ({default: Profile})))
-const ChatPage = lazy(() => import('./pages/Chat/ChatPage'))
+const ChatPage = lazy(() => import('./pages/Chat/ChatPage').then(({ChatPage}) => ({default: ChatPage})))
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
