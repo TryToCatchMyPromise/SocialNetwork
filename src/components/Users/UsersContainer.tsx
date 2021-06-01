@@ -2,7 +2,7 @@ import React, {FC} from 'react'
 import {useSelector} from 'react-redux'
 import {Users} from './Users'
 import Preloader from '../common/Preloader/Preloader'
-import {getIsFetching} from '../../Redux/users-selectors'
+import {getIsFetching} from 'src/Redux/users-selectors'
 
 type UsersPagePropsType = {
     pageTitle: string
