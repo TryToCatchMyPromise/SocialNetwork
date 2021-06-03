@@ -13,9 +13,8 @@ export interface IProfileMatchParams {
 export const useRefreshProfile = () => {
   const match = useRouteMatch<IProfileMatchParams>()
   const history = useHistory()
-  const authorizedUserId = useSelector((state: AppStateType) => state.auth.userId)
+  const {userId: authorizedUserId, isAuth} = useSelector((state: AppStateType) => state.auth)
   const dispatch = useDispatch()
-  console.log('Refresh hook worked!')
 
   useEffect(() => {
     let userId: number | null = +match.params.userId
@@ -31,7 +30,7 @@ export const useRefreshProfile = () => {
       dispatch(getUserProfile(userId as number))
       dispatch(getStatus(userId as number))
     }
-  }, [match.params.userId])
+  }, [match.params.userId, isAuth])
 
 
 }
