@@ -1,30 +1,23 @@
 import {LaptopOutlined, NotificationOutlined, UserOutlined} from '@ant-design/icons'
 import {Breadcrumb, Layout, Menu} from 'antd'
 import 'antd/dist/antd.css'
-import {FC, lazy, useEffect} from 'react'
+import {FC, useEffect} from 'react'
 import {Link, Redirect, Route, Switch} from 'react-router-dom'
 import {useInitialized} from 'src/hooks/useInitialized'
+import {useLazy} from 'src/hooks/useLazy'
 import './App.css'
 import Preloader from './components/common/Preloader/Preloader'
 import {Header} from './components/Header/Header'
 import {LoginPage} from './components/Login/Login'
 import {UsersPage} from './components/Users/UsersContainer'
-import {withSuspense} from './hoc/withSuspense'
 
 const {SubMenu} = Menu
 const {Content, Footer, Sider} = Layout
 
-const Dialogs = lazy(() => import('src/components/Dialogs/Dialogs').then(({Dialogs}) => ({default: Dialogs})))
-const Profile = lazy(() => import('./components/Profile/Profile').then(({Profile}) => ({default: Profile})))
-const ChatPage = lazy(() => import('./pages/Chat/ChatPage').then(({ChatPage}) => ({default: ChatPage})))
-
-const SuspendedDialogs = withSuspense(Dialogs)
-const SuspendedProfile = withSuspense(Profile)
-const SuspendedChatPage = withSuspense(ChatPage)
-
 export const App: FC = () => {
 
   const {initialized} = useInitialized()
+  const {SuspendedDialogs, SuspendedProfile, SuspendedChatPage} = useLazy()
 
   useEffect(() => {
     const catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
