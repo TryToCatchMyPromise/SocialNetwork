@@ -3,6 +3,7 @@ import {Breadcrumb, Layout, Menu} from 'antd'
 import 'antd/dist/antd.css'
 import {FC, useEffect} from 'react'
 import {Link, Redirect, Route, Switch} from 'react-router-dom'
+import {FlexTest} from 'src/components/Flex-test/Flex-test'
 import {useInitialized} from 'src/hooks/useInitialized'
 import {useLazy} from 'src/hooks/useLazy'
 import './App.css'
@@ -77,8 +78,12 @@ export const App: FC = () => {
               <Route path="/chat"
                      render={() => <SuspendedChatPage/>}/>
 
+              <Route path="/flex-test"
+                     render={() => <FlexTest/>}/>
+
               <Route path="*"
                      render={() => <div>404 NOT FOUND</div>}/>
+
             </Switch>
           </Content>
         </Layout>
