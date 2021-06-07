@@ -6,6 +6,19 @@ import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {App} from 'src/App'
 
+const arr = [
+  { id: 14, name: 'Aassd', age: 14, role: 'admin', unic: true },
+  { id: 15, name: 'List', age: 16, role: 'admin', unic: true }
+];
+
+const refFunction = (arr) => {
+  return arr.reduce((acc, {id, ...rest}) => {
+    return {...acc, [id]: { ...rest}  }
+  }, {})
+}
+
+console.log('My func ', refFunction(arr))
+
   ReactDOM.render(
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Provider store={store}>
